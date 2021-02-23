@@ -1,8 +1,10 @@
 export interface Todos {
   _id: string;
   owner: string;
-  status: boolean;
+  status: TodoStatus;
   body: string;
   category: string;
 }
+
+export type TodoStatus = 'true' | 'false';
 
