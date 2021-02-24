@@ -13,15 +13,15 @@ export class TodosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTodos(filters?: {owner?: string; status?: boolean; category?: string; body?: string}): Observable<Todos[]> {
+  getTodos(filters?: {owner?: string; status?: TodoStatus; category?: string; body?: string}): Observable<Todos[]> {
     let httpParams: HttpParams = new HttpParams();
     if(filters) {
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
       }
-      //if(filters.status) {
-        //httpParams = httpParams.set('status', filters.status.toString);
-      //}
+      if(filters.status) {
+        httpParams = httpParams.set('status', filters.status);
+      }
       if(filters.category) {
         httpParams = httpParams.set('category', filters.category);
       }

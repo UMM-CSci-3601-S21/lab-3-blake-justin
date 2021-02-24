@@ -9,50 +9,44 @@
           <!-- Examples of filtering in Angular -->
 
           <mat-form-field class="input-field">
-            <mat-label>Name</mat-label>
-            <input matInput id="user-name-input" placeholder="Filter by name"
+            <mat-label>Owner</mat-label>
+            <input matInput id="todo-owner-input" placeholder="Filter by owner"
             [(ngModel)]="todoOwner" (input)="updateFilter()">
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
-            <mat-label>Company</mat-label>
-            <input matInput id="user-company-input" placeholder="Filter by company"
+            <mat-label>Category</mat-label>
+            <input matInput id="todo-category-input" placeholder="Filter by category"
             [(ngModel)]="todoCategory" (input)="updateFilter()">
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
-            <mat-label>Company</mat-label>
-            <input matInput id="user-company-input" placeholder="Filter by company"
-            [(ngModel)]="todoStatus" (input)="updateFilter()">
+            <mat-label>Body</mat-label>
+            <input matInput id="todo-body-input" placeholder="Filter by body"
+            [(ngModel)]="todoBody" (input)="updateFilter()">
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
-            <mat-label>Company</mat-label>
-            <input matInput id="user-company-input" placeholder="Filter by company"
-            [(ngModel)]="todoBody" (input)="updateFilter()">
+            <mat-label>Status</mat-label>
+            <input matInput id="todo-status-input" placeholder="Filter by status"
+            [(ngModel)]="todoStatus" (input)="updateFilter()">
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
+
         </div>
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering on the server -->
 
           <mat-form-field class="input-field">
-            <mat-label>Age</mat-label>
-            <input matInput id="user-age-input" type="number" placeholder="Filter by age"
-            min="0" max="200" [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
-            <mat-hint>Filtered on server</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field class="input-field">
-            <mat-label>Role</mat-label>
-            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="userRoleSelect">
+            <mat-label>Status</mat-label>
+            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="todoStatusSelect">
               <mat-option>--</mat-option>
-              <mat-option value="true">True</mat-option>
-              <mat-option value="false">False</mat-option>
+              <mat-option value="true">true</mat-option>
+              <mat-option value="false">false</mat-option>
 
             </mat-select>
             <mat-hint>Filtered on server</mat-hint>

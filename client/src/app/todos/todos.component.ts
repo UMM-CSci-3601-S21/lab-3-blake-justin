@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Todos, TodoStatus } from './todos';
 import { TodosService } from './todos.service';
 
@@ -18,13 +19,14 @@ export class TodosComponent implements OnInit {
   public todoCategory: string;
   snackBar: any;
 
-  constructor(private todosService: TodosService) { }
+  constructor(private todosService: TodosService, private route: ActivatedRoute) { }
 
   getTodosFromServer() {
     this.todosService.getTodos({
       owner: this.todoOwner,
       body: this.todoBody,
-      category: this.todoCategory
+      category: this.todoCategory,
+      status: this.todoStatus
 
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
