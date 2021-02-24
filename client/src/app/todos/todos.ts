@@ -6,5 +6,5 @@ export interface Todos {
   category: string;
 }
 
-export type TodoStatus = 'true' | 'false';
+export type TodoStatus = 'complete' | 'incomplete';
 
