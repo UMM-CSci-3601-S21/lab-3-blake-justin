@@ -10,8 +10,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'users', component: UserListComponent},
   {path: 'users/:id', component: UserProfileComponent},
-  {path: 'todos', component:TodosComponent},
-];
+  {path: 'todos', component: TodosComponent},];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
