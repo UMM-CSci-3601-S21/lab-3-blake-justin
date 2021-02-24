@@ -38,13 +38,8 @@ export class TodosService {
     return this.httpClient.get<Todos>(this.todoUrl + '/' + id);
   }
 
-<<<<<<< HEAD
-/*
-  filterTodos(todos: Todos[], filters: {owner?: string; status?: boolean; category?: string; body?: string}): Todos[] {
-=======
 
   filterTodos(todos: Todos[], filters: {owner?: string; status?: TodoStatus; category?: string; body?: string}): Todos[] {
->>>>>>> 15bbe9eb9e639f668c1fc0619ee9a9cfca587a3e
     let filteredTodos = todos;
 
     //Filter by owner
@@ -56,10 +51,6 @@ export class TodosService {
 
     //Filter by status
     if (filters.status) {
-<<<<<<< HEAD
-      filters.status = filters.status.toLowerCase();
-=======
->>>>>>> 15bbe9eb9e639f668c1fc0619ee9a9cfca587a3e
 
       filteredTodos = filteredTodos.filter(todo => todo.status.toLowerCase().indexOf(filters.status) !== -1);
     }
@@ -79,11 +70,6 @@ export class TodosService {
     }
 
   }
-<<<<<<< HEAD
-  */
-=======
-
->>>>>>> 15bbe9eb9e639f668c1fc0619ee9a9cfca587a3e
 
 }
 
