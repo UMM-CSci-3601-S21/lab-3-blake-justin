@@ -17,6 +17,7 @@ export class TodosComponent implements OnInit {
   public todoStatus: string;
   public todoBody: string;
   public todoCategory: string;
+  public todoLimit: number;
   snackBar: any;
 
   constructor(private todosService: TodosService, private route: ActivatedRoute) { }
@@ -26,7 +27,8 @@ export class TodosComponent implements OnInit {
       owner: this.todoOwner,
       body: this.todoBody,
       category: this.todoCategory,
-      status: this.todoStatus
+      status: this.todoStatus,
+      limit: this.todoLimit
 
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
@@ -53,7 +55,8 @@ export class TodosComponent implements OnInit {
   }
   updateFilter() {
     this.filteredTodos = this.todosService.filterTodos(
-      this.serverFilteredTodos, { owner: this.todoOwner, body: this.todoBody, category: this.todoCategory, status: this.todoStatus });
+      this.serverFilteredTodos,
+      { owner: this.todoOwner, body: this.todoBody, category: this.todoCategory });
   }
 
   ngOnInit(): void {
