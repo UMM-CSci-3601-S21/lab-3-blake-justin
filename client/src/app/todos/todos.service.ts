@@ -69,6 +69,8 @@ export class TodosService {
       filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body) !== -1);
     }
 
+    return filteredTodos;
+
   }
 
 
