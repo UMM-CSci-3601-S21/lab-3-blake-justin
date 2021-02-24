@@ -52,7 +52,7 @@ export class TodosService {
     //Filter by status
     if (filters.status) {
 
-      filteredTodos = filteredTodos.filter(todo => todo.status.toLowerCase().indexOf(filters.status) !== -1);
+      filteredTodos = filteredTodos.filter(todo => todo.status().toString().indexOf(filters.status) !== -1);
     }
 
     //Filter by category
