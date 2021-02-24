@@ -20,7 +20,7 @@ export class TodosComponent implements OnInit {
 
   constructor(private todosService: TodosService) { }
 
-  getUsersFromServer() {
+  getTodosFromServer() {
     this.todosService.getTodos({
       owner: this.todoOwner,
       body: this.todoBody,

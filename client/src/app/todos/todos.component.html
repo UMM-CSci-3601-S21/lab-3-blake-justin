@@ -43,30 +43,23 @@
           <mat-form-field class="input-field">
             <mat-label>Age</mat-label>
             <input matInput id="user-age-input" type="number" placeholder="Filter by age"
-            min="0" max="200" [(ngModel)]="userAge" (input)="getUsersFromServer()">
+            min="0" max="200" [(ngModel)]="todoOwner" (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
           <mat-form-field class="input-field">
             <mat-label>Role</mat-label>
-            <mat-select (selectionChange)="getUsersFromServer()" [(ngModel)]="userRole" data-test="userRoleSelect">
+            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="userRoleSelect">
               <mat-option>--</mat-option>
-              <mat-option value="admin">Admin</mat-option>
-              <mat-option value="editor">Editor</mat-option>
-              <mat-option value="viewer">Viewer</mat-option>
+              <mat-option value="true">True</mat-option>
+              <mat-option value="false">False</mat-option>
+
             </mat-select>
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
         </div>
 
         <br>
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-          <label>View type: </label>
-          <mat-radio-group aria-label="View type" [(ngModel)]="viewType" data-test="viewTypeRadio">
-            <mat-radio-button value="card">Card</mat-radio-button>
-            <mat-radio-button value="list">List</mat-radio-button>
-          </mat-radio-group>
-        </div>
 
       </mat-card-content>
     </mat-card>
@@ -74,28 +67,23 @@
 </div>
 
 <div fxLayout="row">
-  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredUsers; else usersError" >
-    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
-    <div [ngSwitch]="viewType">
-
-      <!-- Card grid view -->
-      <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="user-cards-container">
-        <app-user-card simple="true" *ngFor="let user of filteredUsers" class="user-card" [user]="user" fxFlex="1 1 280px"></app-user-card>
-      </div>
-
+  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else usersError" >
       <!-- List view -->
-      <mat-card *ngSwitchCase="'list'">
+      <div>
+
         <mat-card-content>
           <mat-nav-list class="user-nav-list">
             <h3 mat-subheader>Users</h3>
-            <a mat-list-item *ngFor="let user of this.filteredUsers" [routerLink]="['/users', user._id]" class="user-list-item">
-              <img matListAvatar [src]="user.avatar">
-              <h3 matLine class="user-list-name"> {{user.name}} </h3>
-              <p matLine class="user-list-role"> {{user.role}} </p>
+            <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo.owner]" class="user-list-item">
+
+              <h3 matLine class="user-list-name"> {{todo.owner}} </h3>
+              <p matLine class="user-list-role"> {{todo.category}} </p>
+              <p matLine class="user-list-role"> {{todo.status}} </p>
+              <p matLine class="user-list-role"> {{todo.body}} </p>
             </a>
           </mat-nav-list>
         </mat-card-content>
-      </mat-card>
+
 
     </div>
   </div>
