@@ -1,7 +1,7 @@
 export interface Todos {
   _id: string;
   owner: string;
-  status: TodoStatus;
+  status: string;
   body: string;
   category: string;
 }
