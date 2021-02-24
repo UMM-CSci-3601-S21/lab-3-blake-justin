@@ -14,7 +14,7 @@ export class TodosComponent implements OnInit {
   public filteredTodos: Todos[];
 
   public todoOwner: string;
-  public todoStatus: TodoStatus;
+  public todoStatus: string;
   public todoBody: string;
   public todoCategory: string;
   snackBar: any;
@@ -53,10 +53,11 @@ export class TodosComponent implements OnInit {
   }
   updateFilter() {
     this.filteredTodos = this.todosService.filterTodos(
-      this.serverFilteredTodos, { owner: this.todoOwner, body: this.todoBody, category: this.todoCategory });
+      this.serverFilteredTodos, { owner: this.todoOwner, body: this.todoBody, category: this.todoCategory, status: this.todoStatus });
   }
 
   ngOnInit(): void {
+    this.getTodosFromServer();
   }
 
 }

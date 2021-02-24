@@ -13,7 +13,7 @@ export class TodosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTodos(filters?: {owner?: string; status?: TodoStatus; category?: string; body?: string}): Observable<Todos[]> {
+  getTodos(filters?: {owner?: string; status?: string; category?: string; body?: string}): Observable<Todos[]> {
     let httpParams: HttpParams = new HttpParams();
     if(filters) {
       if (filters.owner) {
@@ -39,7 +39,7 @@ export class TodosService {
   }
 
 
-  filterTodos(todos: Todos[], filters: {owner?: string; status?: TodoStatus; category?: string; body?: string}): Todos[] {
+  filterTodos(todos: Todos[], filters: {owner?: string; status?: string; category?: string; body?: string}): Todos[] {
     let filteredTodos = todos;
 
     //Filter by owner
@@ -50,10 +50,10 @@ export class TodosService {
     }
 
     //Filter by status
-    if (filters.status) {
+    //if (filters.status) {
 
-      filteredTodos = filteredTodos.filter(todo => todo.status().toString().indexOf(filters.status) !== -1);
-    }
+      //filteredTodos = filteredTodos.filter(todo => todo.status.toLowerCase().indexOf(filters.status) !== -1);
+    //}
 
     //Filter by category
     if (filters.category) {
