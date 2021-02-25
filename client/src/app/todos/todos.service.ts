@@ -13,8 +13,10 @@ export class TodosService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTodos(filters?: {owner?: string; status?: string; category?: string; body?: string; limit?: number}): Observable<Todos[]> {
-    let httpParams: HttpParams = new HttpParams();
+  getTodos(filters?:
+    {owner?: string; status?: string; category?: string; body?: string; limit?: number; orderBy?: string}): Observable<Todos[]> {
+
+      let httpParams: HttpParams = new HttpParams();
     if(filters) {
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
@@ -31,6 +33,9 @@ export class TodosService {
       if(filters.limit) {
         httpParams = httpParams.set('limit', filters.limit.toString());
       }
+      if(filters.orderBy) {
+        httpParams = httpParams.set('sort', filters.orderBy);
+      }
 
       return this.httpClient.get<Todos[]>(this.todoUrl, {
         params: httpParams,
@@ -43,7 +48,7 @@ export class TodosService {
   }
 
 
-  filterTodos(todos: Todos[], filters: {owner?: string; category?: string; body?: string}): Todos[] {
+  filterTodos(todos: Todos[], filters: {owner?: string; category?: string; body?: string; orderBy?: string}): Todos[] {
     let filteredTodos = todos;
 
     //Filter by owner
@@ -65,6 +70,13 @@ export class TodosService {
       filters.body = filters.body.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => todo.body.toLowerCase().indexOf(filters.body) !== -1);
+    }
+
+    //Sort todos by owner, category, or body
+    if (filters.orderBy) {
+      filters.orderBy = filters.orderBy.toLowerCase();
+
+      filteredTodos = filteredTodos.filter(todo => todo.orderBy.toLowerCase().indexOf(filters.category) !== -1);
     }
 
     return filteredTodos;

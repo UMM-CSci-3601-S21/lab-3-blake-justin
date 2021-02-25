@@ -5,6 +5,7 @@ export interface Todos {
   body: string;
   category: string;
   limit: number;
+  orderBy: string;
 }
 
 export type TodoStatus = 'complete' | 'incomplete';

@@ -28,14 +28,26 @@
             [(ngModel)]="todoBody" (input)="updateFilter()">
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
-        </div>
+
+        <mat-form-field class="input-field">
+          <mat-label>Sort</mat-label>
+          <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoOrderBy" data-test="todoSortSelect">
+          <mat-option>--</mat-option>
+              <mat-option value="owner">Owner</mat-option>
+              <mat-option value="category">Category</mat-option>
+              <mat-option value="body">Body</mat-option>
+            </mat-select>
+
+          <mat-hint>Filtered on client</mat-hint>
+        </mat-form-field>
+      </div>
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering on the server -->
 
           <mat-form-field class="input-field">
             <mat-label>Todos Shown</mat-label>
-            <input matInput id="user-age-input" type="number" placeholder="Filter by limiting"
+            <input matInput id="todo-limit-input" type="number" placeholder="Filter by limiting"
             min="0" max="500" [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
