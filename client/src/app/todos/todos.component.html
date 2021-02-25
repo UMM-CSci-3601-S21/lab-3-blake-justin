@@ -34,11 +34,18 @@
           <!-- Examples of filtering on the server -->
 
           <mat-form-field class="input-field">
+            <mat-label>Todos Shown</mat-label>
+            <input matInput id="user-age-input" type="number" placeholder="Filter by limiting"
+            min="0" max="500" [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
+            <mat-hint>Filtered on server</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
             <mat-label>Status</mat-label>
             <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="todoStatusSelect">
               <mat-option>--</mat-option>
-              <mat-option value="complete">Complete</mat-option>
-              <mat-option value="incomplete">Incomplete</mat-option>
+              <mat-option value="complete">True</mat-option>
+              <mat-option value="incomplete">False</mat-option>
 
             </mat-select>
             <mat-hint>Filtered on server</mat-hint>
