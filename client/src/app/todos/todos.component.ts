@@ -19,6 +19,7 @@ export class TodosComponent implements OnInit {
   public todoCategory: string;
   public todoLimit: number;
   public todoOrderBy: string;
+  public viewType: 'card' | 'list' = 'card';
   snackBar: any;
 
   constructor(private todosService: TodosService, private route: ActivatedRoute) { }
