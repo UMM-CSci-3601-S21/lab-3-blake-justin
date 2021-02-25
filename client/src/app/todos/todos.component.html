@@ -2,7 +2,7 @@
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
 
     <mat-card class="search-card">
-      <mat-card-title class="user-list-title">Users</mat-card-title>
+      <mat-card-title class="todos-list-title">Todos</mat-card-title>
       <mat-card-content fxLayout="column" >
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
@@ -29,9 +29,16 @@
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
 
+          <mat-form-field class="input-field">
+            <mat-label>Sort</mat-label>
+            <input matInput id="todo-sort-input" placeholder="Filter by sort"
+            [(ngModel)]="todoOrderBy" (input)="getTodosFromServer()">
+            <mat-hint>Filtered on client</mat-hint>
+          </mat-form-field>
+
         <mat-form-field class="input-field">
           <mat-label>Sort</mat-label>
-          <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoOrderBy" data-test="todoSortSelect">
+          <mat-select (selectionChange)="updateFilter()" [(ngModel)]="todoOrderBy" data-test="todoSortSelect">
           <mat-option>--</mat-option>
               <mat-option value="owner">Owner</mat-option>
               <mat-option value="category">Category</mat-option>
@@ -48,7 +55,7 @@
           <mat-form-field class="input-field">
             <mat-label>Todos Shown</mat-label>
             <input matInput id="todo-limit-input" type="number" placeholder="Filter by limiting"
-            min="0" max="500" [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
+            min="1" max="4549" [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
 
@@ -58,28 +65,43 @@
               <mat-option>--</mat-option>
               <mat-option value="complete">True</mat-option>
               <mat-option value="incomplete">False</mat-option>
-
             </mat-select>
+
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
         </div>
 
         <br>
 
+        <div fxLayout="row" fxLayoutGap="10px" >
+          <label>View type: </label>
+          <mat-radio-group fxLayoutGap="10px" aria-label="View type" [(ngModel)]="viewType" data-test="viewTypeRadio">
+            <mat-radio-button value="list">List</mat-radio-button>
+            <mat-radio-button value="card">Card</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
-<div fxLayout="row">
-  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else usersError" >
-      <!-- List view -->
+<div fxLayout="row wrap" >
+  <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos" >
+    <div [ngSwitch]="viewType">
+
+<!-- Card grid view -->
+      <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="todo-cards-container">
+        <app-todo-card simple="true" *ngFor="let todos of filteredTodos" class="todo-card" [todos]="todos" fxFlex="1 1 200px"></app-todo-card>
+      </div>
+
+    <!-- List view -->
       <div>
 
         <mat-card-content>
           <mat-nav-list class="user-nav-list">
-            <h3 mat-subheader>Users</h3>
-            <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo.owner]" class="user-list-item">
+            <h3 mat-subheader>Todos</h3>
+            <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="user-list-item">
 
               <h3 matLine class="user-list-name"> {{todo.owner}} </h3>
               <p matLine class="user-list-role"> {{todo.category}} </p>
@@ -94,10 +116,10 @@
   </div>
 
   <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
-  <ng-template #usersError>
-    <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="user-error">
+  <ng-template #todosError>
+    <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="todos-error">
       <mat-error>
-        There was a problem loading the users. Possibly the server is down or perhaps there are network
+        There was a problem loading the todos. Possibly the server is down or perhaps there are network
         issues.
       </mat-error>
       <mat-error>
