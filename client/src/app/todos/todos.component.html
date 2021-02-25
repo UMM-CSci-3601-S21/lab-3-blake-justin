@@ -29,13 +29,6 @@
             <mat-hint>Filtered on client</mat-hint>
           </mat-form-field>
 
-          <mat-form-field class="input-field">
-            <mat-label>Sort</mat-label>
-            <input matInput id="todo-sort-input" placeholder="Filter by sort"
-            [(ngModel)]="todoOrderBy" (input)="getTodosFromServer()">
-            <mat-hint>Filtered on client</mat-hint>
-          </mat-form-field>
-
         <mat-form-field class="input-field">
           <mat-label>Sort</mat-label>
           <mat-select (selectionChange)="updateFilter()" [(ngModel)]="todoOrderBy" data-test="todoSortSelect">
